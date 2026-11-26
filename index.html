@@ -24,12 +24,12 @@
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Anton&family=Caveat:wght@500;700&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Caveat:wght@500;700&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
 <style>
 :root{
   --bg:#F5EDE2;--bg2:#EFE4D4;--card:#FBF7F1;--ink:#151515;--ink2:#4a4640;--muted:#7a746b;--line:rgba(21,21,21,.12);
   --blue:#2b45e0;--blue2:#1f33b8;--navy:#0a1150;--night:#0d1030;--pale:#c9d0ff;--pale2:#e3e7ff;--tan:#e6cfae;--beige:#ece1d0;
-  --f-name:"Anton","Impact","Arial Narrow Bold",sans-serif;--f-serif:"Instrument Serif",Georgia,"Times New Roman",serif;
+  --f-head:"Bricolage Grotesque","Archivo","Arial",system-ui,sans-serif;--f-name:var(--f-head);--f-serif:"Instrument Serif",Georgia,"Times New Roman",serif;
   --f-body:"DM Sans",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;--f-hand:"Caveat","Segoe Print","Comic Sans MS",cursive;
   --pad:48px;--max:1180px;--sec:120px;--r:20px;--ease:cubic-bezier(.22,.8,.2,1);
 }
@@ -415,6 +415,39 @@ body.viewing .wa{display:none}
   .xbands{margin-top:0}
 }
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}html{scroll-behavior:auto}.reveal{opacity:1;transform:none}.loader{display:none}.hero__name span{opacity:1;transform:none}}
+
+/* ===== hall of fame: vertical scroll drives horizontal track ===== */
+.fame{padding:0}
+.fame__pin{position:relative}
+.fame__sticky{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;display:flex;flex-direction:column;justify-content:center;padding:86px 0 30px}
+.fame .reel{overflow:visible;scroll-snap-type:none;cursor:default;will-change:transform;width:max-content;max-width:none;padding:64px var(--pad) 24px}
+.fame .reel:focus{outline:none}
+.fame-native .fame__sticky{position:relative;height:auto;padding:var(--sec) 0}
+.fame-native .fame .reel{overflow-x:auto;width:auto;scroll-snap-type:x mandatory;will-change:auto}
+@media (max-height:700px) and (min-width:481px){.fame .h2{font-size:clamp(36px,4.4vw,56px)}.fcard{flex-basis:200px}.fame .reel{padding-top:54px}}
+
+/* ===== Rafay's typography: Bricolage Grotesque + Instrument Serif italic accent ===== */
+.hero__name{font-family:var(--f-head);font-weight:800;letter-spacing:-.065em;line-height:.84;font-size:clamp(130px,23vw,350px)}
+.logo{font-family:var(--f-head);font-style:normal;font-weight:800;letter-spacing:-.045em;font-size:27px}
+.ld-word{font-family:var(--f-head);font-weight:800;letter-spacing:-.055em}
+.h2{font-family:var(--f-head);font-weight:800;letter-spacing:-.04em;line-height:.98;font-size:clamp(40px,5.6vw,80px)}
+.h2 em{font-family:var(--f-serif);font-weight:400;font-size:1.1em;letter-spacing:-.015em}
+.tile b,.fame__count,.fcard .meta b,.scard h3,.tl h3,.tool b,.slide p,.v-top h2,.ph,.bigname{font-family:var(--f-head);font-weight:800;letter-spacing:-.035em}
+.tile b{letter-spacing:-.055em}.tile b small{font-weight:700}
+.fame__count small{font-family:var(--f-body);font-weight:500}
+.band.b1{font-family:var(--f-head);font-style:normal;font-weight:800;text-transform:uppercase;letter-spacing:-.02em;font-size:clamp(24px,2.6vw,36px)}
+.scard h3{font-size:clamp(38px,4.2vw,58px)}
+.tl h3{font-size:clamp(22px,2.4vw,30px)}
+.tool b{font-size:16px}
+.fcard .meta b{font-size:21px;line-height:1.05}
+.slide p{font-size:22px;line-height:1.15}
+.ph{font-size:clamp(18px,1.8vw,24px)}
+.bigname{letter-spacing:-.06em;-webkit-text-stroke-width:1.4px}
+@media (max-width:1024px){.nav{font-family:var(--f-head);font-weight:800;letter-spacing:-.03em;font-size:38px}}
+@media (min-width:768px) and (max-width:1024px) and (orientation:portrait){.hero__name{font-size:27vw}}
+@media (min-width:481px) and (max-width:767px){.hero__name{font-size:28vw}}
+@media (max-width:480px){.hero__name{font-size:29vw}.tile b{font-size:44px}.t-big b{font-size:84px}}
+@media (prefers-reduced-motion:reduce){.hero__name span{opacity:1;transform:none}}
 </style>
 </head>
 <body class="loading">
@@ -470,13 +503,15 @@ body.viewing .wa{display:none}
 </section>
 
 <!-- HALL OF FAME -->
-<section class="section fame" id="top-work" aria-labelledby="top-title">
+<section class="fame" id="top-work" aria-labelledby="top-title">
+  <div class="fame__pin" id="famePin"><div class="fame__sticky">
   <div class="wrap fame__head">
     <div><span class="eyebrow reveal">Hall of fame</span><h2 class="h2 reveal" id="top-title">The work that <em>stood out</em></h2></div>
     <div class="fame__side reveal">Hand-picked by me. Hover to preview, click to open.<div class="fame__count" id="carCount" aria-live="polite">01 <small>/ 08</small></div></div>
   </div>
-  <div class="reel" id="car" tabindex="0" aria-label="Top 8 projects — scroll or drag sideways"></div>
+  <div class="reel" id="car" aria-label="Top 8 projects — keep scrolling to move through them"></div>
   <div class="wrap"><div class="fame__bar"><i id="fameBar"></i></div></div>
+  </div></div>
 </section>
 
 <!-- PROCESS -->
@@ -770,15 +805,14 @@ $("#discCount").textContent=Math.max(9,new Set(PROJECTS.map(p=>p.category)).size
 /* hall of fame reel */
 const car=$("#car");
 car.innerHTML=featured.map((p,i)=>`<button class="fcard" type="button" data-open="${p.id}" aria-label="Open ${esc(p.title)}"><span class="no" aria-hidden="true">${pad2(i+1)}</span><div class="cv">${imgTag(p.cover,`${p.title} — ${p.category}`,{ph:" ",cat:p.category})}<span class="tag"><i>R</i>${esc(p.category)}</span><span class="meta"><b>${esc(p.title)}</b><small>${esc(p.client)} · ${esc(p.year)}</small></span></div></button>`).join("");
-const padL=()=>parseFloat(getComputedStyle(car).paddingLeft)||0;
-function carIdx(){let b=0,d=1e9;$$(".fcard",car).forEach((el,i)=>{const dd=Math.abs(el.offsetLeft-padL()-car.scrollLeft);if(dd<d){d=dd;b=i;}});return b;}
-function updCar(){$("#carCount").innerHTML=`${pad2(carIdx()+1)} <small>/ ${pad2(featured.length)}</small>`;const max=car.scrollWidth-car.clientWidth;$("#fameBar").style.width=(max>0?20+80*car.scrollLeft/max:100)+"%";}
-car.addEventListener("scroll",()=>requestAnimationFrame(updCar),{passive:true});updCar();
-car.addEventListener("keydown",e=>{if(e.key==="ArrowRight"||e.key==="ArrowLeft"){e.preventDefault();car.scrollBy({left:(e.key==="ArrowRight"?1:-1)*260,behavior:RM?"auto":"smooth"});}});
-/* drag to scroll (desktop) */
-(function(){let down=false,sx=0,sl=0,moved=false;car.addEventListener("pointerdown",e=>{if(e.pointerType!=="mouse")return;down=true;moved=false;sx=e.clientX;sl=car.scrollLeft;});
-addEventListener("pointermove",e=>{if(!down)return;const dx=e.clientX-sx;if(Math.abs(dx)>5){moved=true;car.classList.add("drag");}car.scrollLeft=sl-dx;});
-addEventListener("pointerup",()=>{down=false;car.classList.remove("drag");});car.addEventListener("click",e=>{if(moved){e.stopPropagation();e.preventDefault();moved=false;}},true);})();
+const pin=$("#famePin");let dist=0;const N=featured.length;
+const native=RM||innerWidth<481;
+if(native)document.documentElement.classList.add("fame-native");
+function sizePin(){if(native){pin.style.height="";return;}car.style.transform="";dist=Math.max(0,car.scrollWidth-innerWidth);pin.style.height=(innerHeight+dist)+"px";famePos();}
+function famePos(){let p;if(native){const m=car.scrollWidth-car.clientWidth;p=m>0?car.scrollLeft/m:0;}else{const r=pin.getBoundingClientRect(),span=pin.offsetHeight-innerHeight;p=span>0?Math.min(1,Math.max(0,-r.top/span)):0;car.style.transform=`translate3d(${-p*dist}px,0,0)`;}
+$("#carCount").innerHTML=`${pad2(Math.min(N,Math.round(p*(N-1))+1))} <small>/ ${pad2(N)}</small>`;$("#fameBar").style.width=(12+88*p)+"%";}
+addEventListener("scroll",()=>requestAnimationFrame(famePos),{passive:true});car.addEventListener("scroll",()=>requestAnimationFrame(famePos),{passive:true});
+addEventListener("resize",sizePin);addEventListener("load",sizePin);if(document.fonts)document.fonts.ready.then(sizePin);sizePin();
 function preview(card,p){const v=p&&p.media.find(m=>m.type==="video");if(!v||RM)return;let vid=null;card.addEventListener("mouseenter",()=>{if(!vid){vid=document.createElement("video");vid.src=v.src;vid.muted=true;vid.loop=true;vid.playsInline=true;vid.preload="none";vid.setAttribute("aria-hidden","true");vid.addEventListener("error",()=>vid.remove());card.querySelector(".cv").appendChild(vid);}vid.play().catch(()=>{});});card.addEventListener("mouseleave",()=>vid&&vid.pause());}
 $$(".fcard",car).forEach(c=>preview(c,byId(c.dataset.open)));
 
